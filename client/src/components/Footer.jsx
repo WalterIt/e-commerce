@@ -6,10 +6,13 @@ import PinterestIcon from "@mui/icons-material/Pinterest";
 import RoomIcon from "@mui/icons-material/Room";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  background-color: #eee;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
@@ -19,7 +22,10 @@ const Left = styled.div`
   padding: 20px;
 `;
 
-const Logo = styled.h1``;
+const Logo = styled.h1`
+  ${mobile({ textAlign: "center" })}
+`;
+
 const Description = styled.p`
   margin: 20px 0px;
 `;
@@ -39,15 +45,18 @@ const SocialIcon = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  ${mobile({ marginRight: "30px", marginLeft: "20px" })}
 `;
 
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h3`
   margin-bottom: 30px;
+  ${mobile({ fontSize: "24px", textAlign: "center" })}
 `;
 
 const List = styled.ul`
@@ -67,6 +76,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: "#eee", marginTop: "30px" })}
 `;
 
 const ContactItem = styled.div`
@@ -75,7 +85,9 @@ const ContactItem = styled.div`
   align-items: center;
 `;
 
-const Payment = styled.img``;
+const Payment = styled.img`
+  ${mobile({ marginLeft: "70px" })}
+`;
 
 const Footer = () => {
   return (

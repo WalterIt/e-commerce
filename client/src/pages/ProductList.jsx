@@ -16,7 +16,7 @@ const FilterContainer = styled.div`
 `;
 
 const Filter = styled.div`
-  margin: 5px;
+  margin: 5px 20px;
 `;
 
 const FilterText = styled.span`
