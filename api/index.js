@@ -6,6 +6,8 @@ import cors from "cors";
 import userRoutes from "./routes/user.js";
 import authRoute from "./routes/auth.js";
 import productRoute from "./routes/product.js";
+import cartRoute from "./routes/cart.js";
+import orderRoute from "./routes/order.js";
 
 dotenv.config();
 const app = express();
@@ -26,6 +28,8 @@ mongoose
 app.use("/auth", authRoute);
 app.use("/users", userRoutes);
 app.use("/products", productRoute);
+app.use("/carts", cartRoute);
+app.use("/orders", orderRoute);
 
 app.listen("5000", () => {
   console.log(`Server running on port: 5000!`);
