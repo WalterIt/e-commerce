@@ -8,7 +8,7 @@ const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
 const stripeUserKey = import.meta.env.VITE_STRIPE_KEY;
 
-console.log(stripeUserKey);
+// console.log(stripeUserKey);
 
 const Container = styled.div`
   height: 100vh;
@@ -33,6 +33,7 @@ const Pay = () => {
 
   const onToken = (token) => {
     setStripeToken(token);
+    // console.log(token);
   };
 
   useEffect(() => {
@@ -42,13 +43,13 @@ const Pay = () => {
           url: `${apiUrl}/checkout/payment`,
           method: "post",
           data: {
-            amount: 450,
+            amount: 45000,
             token: stripeToken.id,
           },
         });
 
-        if (response.status === 200) {
-          console.log(response.data);
+        if (response?.status === 200) {
+          console.log(response?.data);
         }
       } catch (error) {
         console.log(error);
@@ -67,7 +68,7 @@ const Pay = () => {
         description="Your total is: $ 450.00"
         amount={45000}
         token={onToken}
-        stripeKey="pk_test_51M0BPGAoYIZrgrgUtgeol0P1fTUF0btnQv6J5Wej02RierMgYfpNC8dHx9swZFVSXJNa97DxXXdM79PeGRO62Yq000QGsO885o"
+        stripeKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
       >
         <Button>Pay Now</Button>
       </StripeCheckout>
