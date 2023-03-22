@@ -8,6 +8,7 @@ import authRoute from "./routes/auth.js";
 import productRoute from "./routes/product.js";
 import cartRoute from "./routes/cart.js";
 import orderRoute from "./routes/order.js";
+import stripeRoute from "./routes/stripe.js";
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.use("/users", userRoutes);
 app.use("/products", productRoute);
 app.use("/carts", cartRoute);
 app.use("/orders", orderRoute);
+app.use("/checkout", stripeRoute);
 
 app.listen("5000", () => {
   console.log(`Server running on port: 5000!`);
