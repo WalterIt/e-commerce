@@ -1,20 +1,26 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
-import cors from "cors";
-import userRoutes from "./routes/user.js";
-import authRoute from "./routes/auth.js";
-import productRoute from "./routes/product.js";
-import cartRoute from "./routes/cart.js";
-import orderRoute from "./routes/order.js";
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const userRoute = require("./routes/user");
+const authRoute = require("./routes/auth");
+const productRoute = require("./routes/product");
+const cartRoute = require("./routes/cart");
+const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 dotenv.config();
-const app = express();
 app.use(express.json());
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -26,10 +32,11 @@ mongoose
 //   res.send("HELLO WORLD!");
 // });
 app.use("/auth", authRoute);
-app.use("/users", userRoutes);
+app.use("/users", userRoute);
 app.use("/products", productRoute);
 app.use("/carts", cartRoute);
 app.use("/orders", orderRoute);
+app.use("/checkout", stripeRoute);
 
 app.listen("5000", () => {
   console.log(`Server running on port: 5000!`);

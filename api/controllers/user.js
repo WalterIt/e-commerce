@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
-import User from "../models/User.js";
+const bcrypt = require("bcrypt");
+const User = require("../models/User.js");
 
-export const update = async (req, res, next) => {
+const update = async (req, res, next) => {
   if (req.body.password) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
@@ -22,7 +22,7 @@ export const update = async (req, res, next) => {
   }
 };
 
-export const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res, next) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     res.status(200).json("User has been deleted!");
@@ -31,7 +31,7 @@ export const deleteUser = async (req, res, next) => {
   }
 };
 
-export const getUser = async (req, res, next) => {
+const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
     const { password, ...otherInfo } = user._doc;
@@ -41,7 +41,7 @@ export const getUser = async (req, res, next) => {
   }
 };
 
-export const getUsers = async (req, res, next) => {
+const getUsers = async (req, res, next) => {
   const query = req.query.new;
   try {
     const users = query
@@ -53,7 +53,7 @@ export const getUsers = async (req, res, next) => {
   }
 };
 
-export const getStats = async (req, res, next) => {
+const getStats = async (req, res, next) => {
   const lastYear = new Date(Date.now() - 31536000000); // Um ano em milissegundos
 
   try {
@@ -79,4 +79,12 @@ export const getStats = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+module.exports = {
+  update,
+  deleteUser,
+  getUser,
+  getUsers,
+  getStats,
 };

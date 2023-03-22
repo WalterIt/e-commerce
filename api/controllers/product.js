@@ -1,6 +1,6 @@
-import Product from "../models/Product.js";
+const Product = require("../models/Product.js");
 
-export const create = async (req, res) => {
+const create = async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
@@ -12,7 +12,7 @@ export const create = async (req, res) => {
   }
 };
 
-export const update = async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -27,7 +27,7 @@ export const update = async (req, res, next) => {
   }
 };
 
-export const deleteProduct = async (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted!");
@@ -36,7 +36,7 @@ export const deleteProduct = async (req, res, next) => {
   }
 };
 
-export const getProduct = async (req, res, next) => {
+const getProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
     res.status(200).json(product);
@@ -45,7 +45,7 @@ export const getProduct = async (req, res, next) => {
   }
 };
 
-export const getProducts = async (req, res, next) => {
+const getProducts = async (req, res, next) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
   try {
@@ -66,4 +66,12 @@ export const getProducts = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+module.exports = {
+  create,
+  deleteProduct,
+  getProduct,
+  getProducts,
+  update,
 };

@@ -1,19 +1,19 @@
-import express from "express";
-import {
+const {
   create,
   deleteOrder,
   getUserOrder,
   getUserOrders,
   update,
   income,
-} from "../controllers/order.js";
-import {
-  verifyToken,
-  verifyTokenAndAdmin,
-  verifyTokenAndAuthorization,
-} from "./verifyToken.js";
+} = require("../controllers/order.js");
 
-const router = express.Router();
+const {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require("./verifyToken");
+
+const router = require("express").Router();
 
 router.post("/", verifyToken, create);
 router.get("/income", verifyTokenAndAdmin, income);
@@ -22,4 +22,4 @@ router.delete("/:id", verifyTokenAndAdmin, deleteOrder);
 router.get("/:userId", verifyTokenAndAuthorization, getUserOrder);
 router.get("/", verifyTokenAndAdmin, getUserOrders);
 
-export default router;
+module.exports = router;

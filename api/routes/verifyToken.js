@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-export const verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   const authHeader = req.headers.token;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
@@ -16,7 +16,7 @@ export const verifyToken = (req, res, next) => {
   }
 };
 
-export const verifyTokenAndAuthorization = (req, res, next) => {
+const verifyTokenAndAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.params.id === req.user.id || req.user.isAdmin) {
       next();
@@ -28,7 +28,7 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
   });
 };
 
-export const verifyTokenAndAdmin = (req, res, next) => {
+const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user.isAdmin) {
       next();
@@ -38,4 +38,10 @@ export const verifyTokenAndAdmin = (req, res, next) => {
         .json("You don't have enought permission to do that!");
     }
   });
+};
+
+module.exports = {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
 };

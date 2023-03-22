@@ -1,17 +1,18 @@
-import express from "express";
-import {
+const Product = require("../models/Product");
+const {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require("./verifyToken");
+
+const router = require("express").Router();
+const {
   create,
   deleteProduct,
   getProduct,
   getProducts,
   update,
-} from "../controllers/product.js";
-import {
-  verifyTokenAndAdmin,
-  verifyTokenAndAuthorization,
-} from "./verifyToken.js";
-
-const router = express.Router();
+} = require("../controllers/product.js");
 
 router.post("/", verifyTokenAndAdmin, create);
 router.put("/:id", verifyTokenAndAdmin, update);
@@ -19,4 +20,4 @@ router.delete("/:id", verifyTokenAndAdmin, deleteProduct);
 router.get("/:id", getProduct);
 router.get("/", getProducts);
 
-export default router;
+module.exports = router;
