@@ -3,6 +3,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Badge } from "@mui/material";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -79,7 +80,9 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>NEXT-COM</Logo>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Logo>NEXT-COM</Logo>
+          </Link>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>

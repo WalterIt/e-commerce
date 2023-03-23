@@ -4,12 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../App";
 
-const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-
-const stripeUserKey = import.meta.env.VITE_STRIPE_KEY;
-
-// console.log(stripeUserKey);
-
 const Container = styled.div`
   height: 100vh;
   display: flex;
@@ -33,7 +27,7 @@ const Pay = () => {
 
   const onToken = (token) => {
     setStripeToken(token);
-    console.log(token);
+    // console.log(token);
   };
 
   useEffect(() => {
@@ -43,7 +37,7 @@ const Pay = () => {
           url: `${apiUrl}/checkout/payment`,
           method: "post",
           data: {
-            amount: 13599,
+            amount: 23459,
             token: stripeToken.id,
           },
         });
@@ -61,17 +55,21 @@ const Pay = () => {
 
   return (
     <Container>
-      <StripeCheckout
-        name="NEXT-COM"
-        billingAddress
-        shippingAddress
-        description="Your total is: $ 135.99"
-        amount={13599}
-        token={onToken}
-        stripeKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
-      >
-        <Button>Pay Now</Button>
-      </StripeCheckout>
+      {stripeToken ? (
+        <span>Processing... Please, wait.</span>
+      ) : (
+        <StripeCheckout
+          name="NEXT-COM"
+          billingAddress
+          shippingAddress
+          description="Your total is: $ 234.59"
+          amount={23459}
+          token={onToken}
+          stripeKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
+        >
+          <Button>Pay Now</Button>
+        </StripeCheckout>
+      )}
     </Container>
   );
 };
