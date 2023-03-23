@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Pay from "./components/stripe/Pay";
+import Success from "./components/stripe/Success";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Cart from "./pages/Cart";
@@ -10,7 +12,7 @@ import ProductList from "./pages/ProductList";
 export const apiUrl = import.meta.env.VITE_BASE_URL;
 
 function App() {
-  const user = true;
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
       <Routes>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/success" element={<Success />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route
           path="/register"
