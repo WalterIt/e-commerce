@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Pay from "./components/stripe/Pay";
 import Success from "./components/stripe/Success";
+// import HomeAdmin from "./pages/admin/home/HomeAdmin";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Cart from "./pages/Cart";
@@ -27,6 +28,9 @@ function App() {
           path="/register"
           element={user ? <Navigate to="/" /> : <Register />}
         />
+        {/* <Route element={<Layout />}>
+          <Route path="/admin" element={<HomeAdmin />} />
+        </Route> */}
       </Routes>
     </BrowserRouter>
   );
