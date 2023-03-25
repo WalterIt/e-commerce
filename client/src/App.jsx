@@ -2,7 +2,14 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Pay from "./components/stripe/Pay";
 import Success from "./components/stripe/Success";
-// import HomeAdmin from "./pages/admin/home/HomeAdmin";
+import HomeAdmin from "./pages/admin/home/HomeAdmin";
+import Layout from "./pages/admin/layout/Layout";
+import NewProduct from "./pages/admin/newProduct/NewProduct";
+import NewUser from "./pages/admin/newUser/NewUser";
+import ProductAdmin from "./pages/admin/product/ProductAdmin";
+import ProductListAdmin from "./pages/admin/productList/ProductListAdmin";
+import User from "./pages/admin/user/User";
+import UserList from "./pages/admin/userList/UserList";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Cart from "./pages/Cart";
@@ -28,9 +35,15 @@ function App() {
           path="/register"
           element={user ? <Navigate to="/" /> : <Register />}
         />
-        {/* <Route element={<Layout />}>
+        <Route element={<Layout />}>
           <Route path="/admin" element={<HomeAdmin />} />
-        </Route> */}
+          <Route path="/admin/users" element={<UserList />} />
+          <Route path="/admin/user/:userId" element={<User />} />
+          <Route path="/admin/newUser" element={<NewUser />} />
+          <Route path="/admin/products" element={<ProductListAdmin />} />
+          <Route path="/admin/product/:productId" element={<ProductAdmin />} />
+          <Route path="/admin/newproduct" element={<NewProduct />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
