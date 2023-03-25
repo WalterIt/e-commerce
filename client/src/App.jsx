@@ -21,6 +21,9 @@ export const apiUrl = import.meta.env.VITE_BASE_URL;
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
+  // console.log(user.other.isAdmin);
+  const admin = user.other.isAdmin;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -34,6 +37,10 @@ function App() {
         <Route
           path="/register"
           element={user ? <Navigate to="/" /> : <Register />}
+        />
+        <Route
+          path="/admin/login"
+          element={admin ? <Navigate to="/admin" /> : <Login />}
         />
         <Route element={<Layout />}>
           <Route path="/admin" element={<HomeAdmin />} />
