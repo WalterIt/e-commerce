@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Pay from "./components/stripe/Pay";
@@ -23,6 +24,11 @@ function App() {
   const user = useSelector((state) => state.user.currentUser);
   // console.log(user.other.isAdmin);
   const admin = user?.other?.isAdmin;
+  const [admin1, setAdmin1] = useState({});
+
+  useEffect(() => {
+    setAdmin1(admin);
+  }, [admin, admin1]);
 
   return (
     <BrowserRouter>
