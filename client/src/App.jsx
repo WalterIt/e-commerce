@@ -22,7 +22,7 @@ export const apiUrl = import.meta.env.VITE_BASE_URL;
 function App() {
   const user = useSelector((state) => state.user.currentUser);
   // console.log(user.other.isAdmin);
-  const admin = user.other.isAdmin;
+  const admin = user?.other?.isAdmin;
 
   return (
     <BrowserRouter>
@@ -43,7 +43,10 @@ function App() {
           element={admin ? <Navigate to="/admin" /> : <Login />}
         />
         <Route element={<Layout />}>
-          <Route path="/admin" element={<HomeAdmin />} />
+          <Route
+            path="/admin"
+            element={admin ? <HomeAdmin /> : <Navigate to="/admin/login" />}
+          />
           <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/user/:userId" element={<User />} />
           <Route path="/admin/newUser" element={<NewUser />} />

@@ -26,7 +26,7 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Revenue</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">${income[1].total.toFixed(2)}</span>
+          <span className="featuredMoney">${income[1]?.total.toFixed(2)}</span>
           <span className="featuredMoneyRate">
             %{perc.toFixed(2)}
             {perc < 0 ? (

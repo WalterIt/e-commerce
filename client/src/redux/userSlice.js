@@ -20,6 +20,10 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+
+    logout: (state) => {
+      state.currentUser = null;
+    },
   },
 });
 
