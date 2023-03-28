@@ -26,6 +26,15 @@ export const login = async (dispatch, user) => {
   }
 };
 
+export const register = async (newUser) => {
+  try {
+    const res = await publicRequest.post("/auth/register", newUser);
+    // console.log(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {

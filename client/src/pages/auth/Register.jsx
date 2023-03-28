@@ -1,5 +1,17 @@
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { register } from "../../redux/apiCalls";
 import { mobile } from "../../responsive";
+
+const initialState = {
+  username: "",
+  email: "",
+  firstName: "",
+  lastName: "",
+  password: "",
+  passwordConfirm: "",
+};
 
 const Container = styled.div`
   width: 100vw;
@@ -58,23 +70,112 @@ const Button = styled.button`
   letter-spacing: 2px;
 `;
 
+const Alert = styled.span`
+  font-size: 14px;
+  font-weight: 700;
+  margin: 5px 0px;
+  color: red;
+`;
+
 const Register = () => {
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [inputs, setInputs] = useState({});
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  function validarEmail(email) {
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    if (emailRegex.test(email)) {
+      return true;
+    }
+
+    return false;
+  }
+  const emailValid = validarEmail(inputs.email);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    try {
+      const emailValid = validarEmail(inputs.email);
+      if (emailValid && passwordConfirm === inputs?.password) {
+        const res = register(inputs);
+        navigate("/login");
+      } else {
+        console.log("Email invalid! Please, enter a valid Email.");
+      }
+    } catch (error) {
+      // console.log(error);
+      console.log("Erro ao registrar", error);
+    }
+    setInputs(initialState);
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input type="text" placeholder="First Name" />
-          <Input type="text" placeholder="Last Name" />
-          <Input type="text" placeholder="User Name" />
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
-          <Input type="password" placeholder="Confirm Password" />
+          <Input
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="text"
+            placeholder="User Name"
+            name="username"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            name="passwordConfirm"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            required
+          />
+          {emailValid && !emailValid && (
+            <Alert>Please, enter a valid email!</Alert>
+          )}
+          {inputs?.password &&
+            passwordConfirm &&
+            passwordConfirm !== inputs?.password && (
+              <Alert>The passwords don't match!</Alert>
+            )}
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleClick}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

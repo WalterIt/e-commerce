@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -198,12 +198,25 @@ const Cart = () => {
       <Wrapper>
         <Title>Your Cart</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <Link to="/">
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag({cart.products.length})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+
+          <StripeCheckout
+            name="NEXT-COM"
+            billingAddress
+            shippingAddress
+            description={`Your total is: $ ${cart.total}`}
+            amount={cart.total * 100}
+            token={onToken}
+            stripeKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
+          >
+            <TopButton type="filled">CHECKOUT NOW</TopButton>
+          </StripeCheckout>
         </Top>
 
         <Bottom>

@@ -45,7 +45,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 40%;
+  width: 100%;
   border: none;
   padding: 15px 20px;
   background-color: teal;
@@ -57,6 +57,9 @@ const Button = styled.button`
   &:disabled {
     color: green;
     cursor: not-allowed;
+  }
+  &:hover {
+    background-color: rgba(0, 128, 128, 0.74);
   }
 `;
 
@@ -76,10 +79,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
+  const [err, setErr] = useState(false);
 
   const handleClick = (e) => {
-    e.preventDefault();
-    login(dispatch, { email, password });
+    try {
+      e.preventDefault();
+      const res = login(dispatch, { email, password });
+      if (res) setErr(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -100,7 +109,7 @@ const Login = () => {
           <Button onClick={handleClick} disabled={isFetching}>
             SIGN IN
           </Button>
-          {error && <Error>Something went wrong...</Error>}
+          {err && <Error>Something went wrong...</Error>}
           <Link>DON'T YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>
