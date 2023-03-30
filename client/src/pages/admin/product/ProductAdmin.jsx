@@ -92,7 +92,9 @@ export default function ProductAdmin() {
             </div> */}
             <div className="productInfoItem">
               <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue">{product.inStock}</span>
+              <span className="productInfoValue">
+                {product.inStock ? "Yes" : "No"}
+              </span>
             </div>
           </div>
         </div>
@@ -103,7 +105,12 @@ export default function ProductAdmin() {
             <label>Product Name</label>
             <input type="text" placeholder={product.title} />
             <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
+            <textarea
+              type="text"
+              cols="30"
+              rows="10"
+              placeholder={product.desc}
+            ></textarea>
             <label>Product Price</label>
             <input type="number" placeholder={product.price} />
             <label>In Stock</label>

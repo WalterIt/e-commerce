@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     img: { type: String },
+    phone: { type: String },
+    occupation: { type: String },
+    phone: { type: String },
+    address: { type: Object },
+    gender: { type: String },
   },
   { timestamps: true }
 );

@@ -21,7 +21,7 @@ import ProductList from "./pages/ProductList";
 export const apiUrl = import.meta.env.VITE_BASE_URL;
 
 function App() {
-  const user = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.user?.currentUser || {});
   // console.log(user.other.isAdmin);
   const admin = user?.other?.isAdmin;
   const [admin1, setAdmin1] = useState({});

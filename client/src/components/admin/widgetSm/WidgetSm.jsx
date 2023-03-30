@@ -2,6 +2,7 @@ import "./widgetSm.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useEffect, useState } from "react";
 import { userRequest } from "../../../../requestMethod";
+import { Link } from "react-router-dom";
 
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
@@ -33,12 +34,17 @@ export default function WidgetSm() {
             />
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
-              {/* <span className="widgetSmUserTitle">Software Engineer</span> */}
+              <span className="widgetSmUserTitle">{user.occupation}</span>
             </div>
-            <button className="widgetSmButton">
-              <VisibilityIcon className="widgetSmIcon" />
-              Display
-            </button>
+            <Link
+              to={"/admin/user/" + user._id}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <button className="widgetSmButton">
+                <VisibilityIcon className="widgetSmIcon" />
+                Display
+              </button>
+            </Link>
           </li>
         ))}
       </ul>

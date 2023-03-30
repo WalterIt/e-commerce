@@ -35,11 +35,11 @@ export default function WidgetLg() {
         {orders.map((order, i) => (
           <tr key={i} className="widgetLgTr">
             <td className="widgetLgUser">
-              {/* <img
-                src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              <img
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                 alt=""
                 className="widgetLgImg"
-              /> */}
+              />
               <span className="widgetLgName">{order.userId}</span>
             </td>
             <td className="widgetLgDate">{format(order.createdAt)}</td>

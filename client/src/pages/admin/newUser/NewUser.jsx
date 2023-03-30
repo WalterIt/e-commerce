@@ -7,19 +7,23 @@ export default function NewUser() {
       <form className="newUserForm">
         <div className="newUserItem">
           <label>Username</label>
-          <input type="text" placeholder="john" />
+          <input type="text" name="username" placeholder="john" />
         </div>
         <div className="newUserItem">
-          <label>Full Name</label>
-          <input type="text" placeholder="John Smith" />
+          <label>First Name</label>
+          <input type="text" name="firstName" placeholder="John" />
+        </div>
+        <div className="newUserItem">
+          <label>Last Name</label>
+          <input type="text" name="lastName" placeholder="Smith" />
         </div>
         <div className="newUserItem">
           <label>Email</label>
-          <input type="email" placeholder="john@gmail.com" />
+          <input type="email" name="email" placeholder="youremail@gmail.com" />
         </div>
         <div className="newUserItem">
           <label>Password</label>
-          <input type="password" placeholder="password" />
+          <input type="password" name="password" placeholder="password" />
         </div>
         <div className="newUserItem">
           <label>Phone</label>
@@ -27,7 +31,7 @@ export default function NewUser() {
         </div>
         <div className="newUserItem">
           <label>Address</label>
-          <input type="text" placeholder="New York | USA" />
+          <input type="text" name="address" placeholder="City | Country" />
         </div>
         <div className="newUserItem">
           <label>Gender</label>
@@ -41,10 +45,10 @@ export default function NewUser() {
           </div>
         </div>
         <div className="newUserItem">
-          <label>Active</label>
-          <select className="newUserSelect" name="active" id="active">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+          <label>Admin</label>
+          <select className="newUserSelect" name="isAdmin" id="isAdmin">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
           </select>
         </div>
         <button className="newUserButton">Create</button>

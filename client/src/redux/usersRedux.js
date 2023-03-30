@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userSlice = createSlice({
-  name: "user",
+const usersSlice = createSlice({
+  name: "users",
   initialState: {
-    currentUser: null,
+    username: null,
+    email: null,
+    username: null,
+    username: null,
+    username: null,
     isFetching: false,
     error: false,
   },
@@ -85,10 +89,6 @@ const userSlice = createSlice({
 });
 
 export const {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-  logout,
   getUserStart,
   getUserSuccess,
   getUserFailure,
